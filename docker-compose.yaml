@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  recherche-db:
+    container_name: recherche-db
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./recherche-db-data:/var/lib/postgresql/data
+
+  api-aircraftdetect:
+    container_name: api-aircraftdetect
+    image: api-aircraftdetect
+    build: ./api-aircraftdetect
+
+  api-recherche:
+    container_name: api-recherche
+    image: api-recherche
+    build: ./api-recherche
+    ports:
+      - 8000:8000
+    volumes:
+      - ./images:/usr/src/app/images
+    
